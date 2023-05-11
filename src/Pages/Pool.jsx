@@ -7,10 +7,17 @@ import {ContextObj} from '../Components/Context';
 
 
 export default function Pool() {
-    const context = useContext(ContextObj);
+    const {memesData, likeMeme} = useContext(ContextObj);
     
+    function handleHover(index) { /*change it */
+        console.log(index);
+    }
     
-    const memes = context.map((item, index)=> <Meme key={index} url={item.url}/>)
+    const memes = memesData.map((item, index)=> <Meme 
+    key={index} 
+    index={index}  
+    url={item.url}
+    />)
     return (
         <>
             <div className='grid-container'>

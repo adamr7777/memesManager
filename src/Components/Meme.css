@@ -7,3 +7,53 @@
     object-fit: cover;
     
 }
+
+.meme-container {
+    position: relative;
+}
+
+.like {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    color: darkred;
+}
+
+.like:hover {
+    cursor: pointer;
+}
+
+.ri-menu-add-line {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    color: white;
+}
+
+.ri-menu-add-line:hover {
+    cursor: pointer;
+}
+
+.ri-chat-1-line {
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+    color: white;
+}
+
+.ri-chat-1-line:hover {
+    cursor: pointer;
+} 
+
+.comment-window {
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+}
+
+
+/* .ri-heart-fill:hover,
+.ri-menu-add-line:hover,
+.ri-chat-1-line:hover {
+    cursor: hover;
+}                      */

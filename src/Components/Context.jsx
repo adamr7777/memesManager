@@ -14,14 +14,36 @@ export function ContextProvider({children}) {
             .then((response)=> response.json())
             .then((data)=> {
                 const memes = data.data.map((item)=> {
-                    return {url: item.images.original.url}
+                    return {
+                        url: item.images.original.url,
+                        liked: false,
+                        favorite: false,
+                        comments: [],
+                    }
                 });
                 setMemesData(memes);
                 console.log('API ran')
             });
-    }, [])
+    }, []);
+
+    function likeMeme(memeIndex) {
+        setMemesData((prev)=> prev.map((item, index)=> {
+            if (memeIndex !== index) return item;
+            if (memeIndex === index) return {...item, liked: !item.liked}
+        }));
+    };
+
+    function commentMeme(comment, memeIndex) {
+        setMemesData((prev)=> prev.map((item, index)=> {
+            if (memeIndex !== index) return item;
+            if (memeIndex === index) return {...item, comments: [...item.comments, comment] }
+        }));
+    }
+
+    console.log(memesData);
+
     return (
-        <ContextObj.Provider value={memesData}>
+        <ContextObj.Provider value={{memesData, likeMeme, commentMeme}}>
             {children}
         </ContextObj.Provider>
     );
