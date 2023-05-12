@@ -33,10 +33,11 @@ export function ContextProvider({children}) {
         }));
     };
 
-    function commentMeme(comment, memeIndex) {
+    function commentMeme(comment, memeIndex, setText) {
         setMemesData((prev)=> prev.map((item, index)=> {
             if (memeIndex !== index) return item;
-            if (memeIndex === index) return {...item, comments: [...item.comments, comment] }
+            if (memeIndex === index) return {...item, comments: [...item.comments, comment]};
+            setText('');
         }));
     }
 

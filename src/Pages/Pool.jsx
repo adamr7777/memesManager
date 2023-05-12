@@ -7,7 +7,7 @@ import {ContextObj} from '../Components/Context';
 
 
 export default function Pool() {
-    const {memesData, likeMeme} = useContext(ContextObj);
+    const {memesData} = useContext(ContextObj);
     
     function handleHover(index) { /*change it */
         console.log(index);

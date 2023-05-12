@@ -9,9 +9,9 @@ import {ContextProvider} from './Components/Context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <ContextProvider>
-        <Router>
-            <App/>
-        </Router>
-    </ContextProvider>
+        <ContextProvider>
+            <Router>
+                <App/>
+            </Router>
+        </ContextProvider>
 );

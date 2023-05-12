@@ -51,6 +51,29 @@
     right: 5px;
 }
 
+.textarea {
+    resize: none;
+    width: 150px;
+    height: 120px;
+    border: 3px solid #0d6efd;
+}
+
+
+.btn-close {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: 3px;
+}
+
+.btn-add-comment {
+    position: absolute;
+    bottom: 12px;
+    right: 6px;
+    font-size: 8px;
+    padding: 0.20rem 0.4rem
+}
+
 
 /* .ri-heart-fill:hover,
 .ri-menu-add-line:hover,

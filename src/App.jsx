@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Route, Routes} from 'react-router-dom';
 
 import './styles.css'
@@ -11,7 +11,7 @@ import Library from './Pages/Library';
 
 
 
-export default function App() {
+const App =  memo(function App() {
     return (
         <>
             <Header/>
@@ -22,4 +22,6 @@ export default function App() {
             </Routes>
         </>
     );
-};
+});
+
+export default App;
