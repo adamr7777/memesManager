@@ -18,6 +18,7 @@ export default function Pool() {
     index={index}  
     url={item.url}
     />)
+    
     return (
         <>
             <div className='grid-container'>

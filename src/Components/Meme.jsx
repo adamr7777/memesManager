@@ -8,9 +8,13 @@ import {ContextObj} from './Context';
 export default function Meme(props) {
     const [hovered, setHovered] = useState(false);
     const [commentIconClicked, setCommentIconClicked] =  useState(false);
-    const {memesData, likeMeme, commentMeme} = useContext(ContextObj);
+    const {memesData, likeMeme, commentMeme, favoriteMeme} = useContext(ContextObj);
     const heartClassName = memesData[props.index].liked ? 'ri-heart-fill like' : 'ri-heart-line like';
+    const iconFav = <i className='ri-checkbox-line' onClick={()=> favoriteMeme(props.index)}></i>;
+    const iconNotFav = <i className='ri-menu-add-line' onClick={()=> favoriteMeme(props.index)}></i>;
+    const favoriteIcon = memesData[props.index].favorite ? iconFav : iconNotFav;
     const [currentComment, setCurrentComment] = useState('');
+    // <i class="ri-checkbox-line"></i>
 
     function handleClose() {
         setCommentIconClicked(false);
@@ -33,7 +37,7 @@ export default function Meme(props) {
         <div onMouseEnter={()=> setHovered(true)} onMouseLeave={()=> setHovered(false)} className='meme-container'>
             <img className='meme' src={props.url}/>
             {hovered && <i className={heartClassName} onClick={()=> likeMeme(props.index)}></i>} 
-            {hovered && <i className='ri-menu-add-line'></i>}
+            {hovered && favoriteIcon}
             {hovered && !commentIconClicked && 
                 <i className='ri-chat-1-line' onClick={()=>setCommentIconClicked(true)}></i>}
             {commentIconClicked && <div className='comment-window'>

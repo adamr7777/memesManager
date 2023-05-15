@@ -1,6 +1,5 @@
 
 
-
 .meme {
     width: 100%;
     height: 100%;
@@ -23,14 +22,20 @@
     cursor: pointer;
 }
 
-.ri-menu-add-line {
+.ri-menu-add-line, 
+.ri-checkbox-line {
     position: absolute;
     top: 0;
     left: 5px;
     color: white;
 }
 
-.ri-menu-add-line:hover {
+.ri-checkbox-line {
+    color: red;
+}
+
+.ri-menu-add-line:hover, 
+.ri-checkbox-line:hover {
     cursor: pointer;
 }
 

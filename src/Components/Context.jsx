@@ -29,22 +29,31 @@ export function ContextProvider({children}) {
     function likeMeme(memeIndex) {
         setMemesData((prev)=> prev.map((item, index)=> {
             if (memeIndex !== index) return item;
-            if (memeIndex === index) return {...item, liked: !item.liked}
+            else if (memeIndex === index) return {...item, liked: !item.liked};
+        }));
+    };
+
+    function favoriteMeme(memeIndex) {
+        setMemesData((prev)=> prev.map((item, index)=> {
+            if (memeIndex !== index) return item;
+            else if (memeIndex === index) return {...item, favorite: !item.favorite};
         }));
     };
 
     function commentMeme(comment, memeIndex, setText) {
         setMemesData((prev)=> prev.map((item, index)=> {
             if (memeIndex !== index) return item;
-            if (memeIndex === index) return {...item, comments: [...item.comments, comment]};
+            else if (memeIndex === index) return {...item, comments: [...item.comments, comment]};
             setText('');
         }));
-    }
+    };
 
-    console.log(memesData);
+    
+
+    // console.log(memesData);
 
     return (
-        <ContextObj.Provider value={{memesData, likeMeme, commentMeme}}>
+        <ContextObj.Provider value={{memesData, likeMeme, commentMeme, favoriteMeme}}>
             {children}
         </ContextObj.Provider>
     );
