@@ -8,7 +8,7 @@ export default function FavoriteMemes() {
         <div className='container-fluid'>
             <div className="row">
                 <Sidebar/>
-                <MemesList/>
+                <MemesList customHook={()=> <h1>Favorite Memes</h1>}/>
             </div>      
         </div>
     );

@@ -8,6 +8,7 @@ import Pool from './Pages/Pool';
 import Upload from './Pages/Upload';
 import Library from './Pages/Library';
 import FavoriteMemes from './Pages/FavoriteMemes';
+import UploadedMemes from './Pages/UploadedMemes';
 
 
 
@@ -20,7 +21,8 @@ const App =  memo(function App() {
                 <Route exact path='/' element={<Pool/>}/>
                 <Route path='/upload' element={<Upload/>}/>
                 <Route exact path='/library' element={<Library/>}/>
-                <Route exact path='/FavoriteMemes' element={<FavoriteMemes/>}/>
+                    <Route exact path='/favoriteMemes' element={<FavoriteMemes/>}/>
+                    <Route exact path='/uploadedMemes' element={<UploadedMemes/>}/>
             </Routes>
         </>
     );

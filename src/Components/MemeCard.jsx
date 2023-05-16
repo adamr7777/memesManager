@@ -1,11 +1,25 @@
-import React from 'react';
+import React, {useContext} from 'react';
+
+import {ContextObj} from './Context';
 
 
 
 export default function MemeCard(props) {
+    const {memesData, setMemesData} = useContext(ContextObj);
+
+    function removeMeme() {
+        setMemesData((prevState)=> [...prevState, {...props.index, liked: false}]);
+        // const meme = memesData.map((item, index)=> {
+        //     if (props.index !== index) return null;
+        //     else return {...item, liked: false};
+        // }).filter((item)=> item);
+        // setMemesData((prevState)=> [...prevState, meme]);
+        console.log(memesData[props.index]);
+    };
+
     const cardStyle = {
         margin: '30px 0'
-    }
+    };
 
    
     
@@ -18,7 +32,7 @@ export default function MemeCard(props) {
                     <p className='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     <div className='d-flex justify-content-around' >
                         <button className='btn btn-primary mr-2'>Expand...</button>
-                        <button className='btn btn-danger'>Remove</button>  
+                        <button className='btn btn-danger'onClick={removeMeme}>Remove</button>  
                     </div>
                 </div>
             </div>

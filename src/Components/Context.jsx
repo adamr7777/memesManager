@@ -15,6 +15,7 @@ export function ContextProvider({children}) {
             .then((data)=> {
                 const memes = data.data.map((item)=> {
                     return {
+                        origin: 'api',
                         url: item.images.original.url,
                         liked: false,
                         favorite: false,
@@ -53,7 +54,7 @@ export function ContextProvider({children}) {
     // console.log(memesData);
 
     return (
-        <ContextObj.Provider value={{memesData, likeMeme, commentMeme, favoriteMeme}}>
+        <ContextObj.Provider value={{memesData, setMemesData, likeMeme, commentMeme, favoriteMeme}}>
             {children}
         </ContextObj.Provider>
     );

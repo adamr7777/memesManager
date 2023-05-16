@@ -18,9 +18,9 @@ export default function Sidebar() {
                         >Favorite Memes
                     </NavLink>
                 </li>
-                {/* <li className="nav-item">
-                    <a className="nav-link" href="#">Item 3</a>
-                </li> */}
+                <li className="nav-item">
+                    <NavLink className='nav-link' activeclassname='active' to='/uploadedMemes'>Uploaded Memes</NavLink>
+                </li>
             </ul>
         </div>
     );
