@@ -6,6 +6,7 @@ export const ContextObj = createContext();
 export function ContextProvider({children}) {
     const allowApi = true;
     const [memesData, setMemesData] = useState([]);
+    const [memeInCreateMeme, setMemeInCreateMeme] = useState(null);
     const url = 'https://api.giphy.com/v1/gifs/search?api_key=ydEyl4nja4f2KWAwXO98qbi58a076TdS&q=meme&limit=25&offset=0&rating=g&lang=en'
     useEffect(()=> {
         if (!allowApi) return
@@ -26,6 +27,8 @@ export function ContextProvider({children}) {
                 console.log('API ran')
             });
     }, []);
+
+   
 
     function likeMeme(memeIndex) {
         setMemesData((prev)=> prev.map((item, index)=> {
@@ -49,12 +52,28 @@ export function ContextProvider({children}) {
         }));
     };
 
+    function removeMeme(memeIndex) {   /*review the function */
+        // setMemesData((prevState)=> [...prevState, {...memeIndex, liked: false}]);
+        // const meme = memesData.map((item, index)=> {
+        //     if (memeIndex !== index) return null;
+        //     else return {...item, liked: false};
+        // }).filter((item)=> item);
+        const meme = memesData[memeIndex];
+        setMemesData((prevState)=> [...prevState, {meme, liked: false}]);
+        // console.log(memeIndex);
+    };
+
+    function sendMemetoCreate(memeIndex) {
+        const meme = memesData[memeIndex];
+        setMemeInCreateMeme(meme);
+    }
+
+    // console.log(memeInCreateMeme);
     
 
-    // console.log(memesData);
 
     return (
-        <ContextObj.Provider value={{memesData, setMemesData, likeMeme, commentMeme, favoriteMeme}}>
+        <ContextObj.Provider value={{memesData, memeInCreateMeme, setMemesData, likeMeme, commentMeme, favoriteMeme, removeMeme, sendMemetoCreate}}>
             {children}
         </ContextObj.Provider>
     );

@@ -9,4 +9,5 @@
 #refactor that a component would send item instead of index 
 #review or delete remove meme functionality
 #in Upload changeHandler() set an error catcher when choose file is clicked and closed without uploading anything
-recactor API promises to Async/Await
+#recactor API promises to Async/Await
+#change every search by the index to the search by an unique code

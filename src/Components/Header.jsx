@@ -23,6 +23,7 @@ export default function Header() {
                         <li className='nav-item active'><Link className='nav-link text-white' to='/'>Memes Pool</Link></li>
                         <li className='nav-item active'><Link className='nav-link text-white' to='/upload'>Upload Your Meme</Link></li>
                         <li className='nav-item active'><Link className='nav-link text-white' to='/library'>Meme Library</Link></li>
+                        <li className='nav-item active'><Link className='nav-link text-white' to='/createMeme'>Create Your Meme</Link></li>
                     </ul>
                 </div>
             </div>
