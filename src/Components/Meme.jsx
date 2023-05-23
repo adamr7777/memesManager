@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 
 import './Meme.css';
 import {ContextObj} from './Context';
@@ -14,24 +14,28 @@ export default function Meme(props) {
     const iconNotFav = <i className='ri-menu-add-line' onClick={()=> favoriteMeme(props.index)}></i>;
     const favoriteIcon = memesData[props.index].favorite ? iconFav : iconNotFav;
     const [currentComment, setCurrentComment] = useState('');
+    const commentsQuantity = memesData[props.index].comments.length > 0 ? 
+    memesData[props.index].comments.length : null;
+    // const [commentsQuantity, setCommentsQuantity] = useState(null);
     // <i class="ri-checkbox-line"></i>
 
     function handleClose() {
         setCommentIconClicked(false);
         setCurrentComment('');
     }
-    // const heartClassName = 'ri-heart-line like';
-    // const a = 0.375;
-    // const b = 0.75;
-    // const c = 1.8;
-
-    // console.log(`${a/c} and ${b/c}`);
-    // console.log(comment);
-
+    
     function handleSubmit() {
         commentMeme(currentComment, props.index);
         setCurrentComment('');
     }
+
+    // useEffect(()=> {
+    //     const commentsArray = memesData[props.index].comments;
+    //     if (commentsArray.length < 1) return;
+    //     setCommentsQuantity(commentsArray.length)
+    // }, 
+    //     [memesData[props.index].comments])
+
 
     return (
         <div onMouseEnter={()=> setHovered(true)} onMouseLeave={()=> setHovered(false)} className='meme-container'>
@@ -39,7 +43,7 @@ export default function Meme(props) {
             {hovered && <i className={heartClassName} onClick={()=> likeMeme(props.index)}></i>} 
             {hovered && favoriteIcon}
             {hovered && !commentIconClicked && 
-                <i className='ri-chat-1-line' onClick={()=>setCommentIconClicked(true)}></i>}
+                <i className='ri-chat-1-line' onClick={()=>setCommentIconClicked(true)}>{commentsQuantity}</i>}
             {commentIconClicked && <div className='comment-window'>
                 <textarea className='textarea' onChange={(e)=> setCurrentComment(e.target.value)} value={currentComment}/>
                 <button type="button" className="btn-close" onClick={handleClose} aria-label="Close"></button>

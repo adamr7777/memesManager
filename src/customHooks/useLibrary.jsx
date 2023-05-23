@@ -6,10 +6,13 @@ import MemeCard from '../Components/MemeCard';
 export default function useLikedMemes(conditionPrompt) {
     
     const {memesData} = useContext(ContextObj);
+
     return memesData.map((item, index)=> {
         const condition = conditionPrompt === 'likedMemes' ? item.liked : 
             conditionPrompt === 'uploadedMemes' ? item.origin === 'uploaded' :
-                conditionPrompt === 'favoriteMemes' ? item.favorite : null;
+                conditionPrompt === 'favoriteMemes' ? item.favorite :
+                conditionPrompt === 'commentedMemes' ? item.comments.length > 0 
+                    : null;
         if (condition) return <MemeCard index={index} meme={item} key={index} url={item.url}/>;
         else return null;
     }).filter((item)=> item);

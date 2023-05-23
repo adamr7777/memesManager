@@ -26,7 +26,7 @@ export default function CreateMeme() {
     useEffect(()=> {
         if (!meme) return;
         const context = canvasRef.current.getContext('2d');
-        context.clearRect(0, 0, canvasRef.width, canvasRef.height);
+        context.clearRect(0, 0, size, size);
         context.drawImage(meme, position, position, size, size);
 
         context.font = '28px Comic Sans Mc';
@@ -39,18 +39,24 @@ export default function CreateMeme() {
 
     function submitMeme(e) {
         e.preventDefault();
-        setCompletedMemes((prevState)=> [...prevState, meme]);
-    }
+        
+        const context = canvasRef.current.getContext('2d');
+        const url = canvasRef.current.toDataURL();
+        setCompletedMemes((prevState)=> [...prevState, {url: url}]);
+        context.clearRect(0, 0, size, size);
+        setMeme(null)
+    };
 
+    function removeMeme() {
+        const context = canvasRef.current.getContext('2d');
+        context.clearRect(0, 0, size, size);
+    }
 
 
     return (
         <div className='card mt-4' style={styles}>
             <div className='mt-3'>
                 {meme && <canvas width={size} height={size} ref={canvasRef}/>}
-            </div>
-            <div>
-            
             </div>
             <div className='card-body'>
                 <p className='card-text'>Create your meme by choosing the text and the color!</p>
@@ -70,6 +76,9 @@ export default function CreateMeme() {
                         <div className='row'>
                             <div className='col'>
                                 <button className='btn btn-primary w-100 mt-3' onClick={submitMeme} type='submit'>Submit</button>
+                            </div>
+                            <div className='col-5'>
+                                <button className='btn btn-danger w-100 mt-3' onClick={removeMeme} type='submit'>Remove</button>
                             </div>
                         </div>
                     </form>

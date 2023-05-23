@@ -103,7 +103,7 @@ export function ContextProvider({children}) {
         setMemeInCreateMeme(meme);
     }
 
-    // console.log(memeInCreateMeme);
+    // console.log(memesData[0]);
     
 
 

@@ -12,4 +12,10 @@
 #recactor API promises to Async/Await <completed
 #change every search by the index to the search by an unique code
 #clean up Context.jsx 
-center memeList
+#center memeList
+#meme submited text in create your meme
+#make a custom text position in createMeme
+#fix canvas size
+#fix lidateDOMNesting on Comment.jsx
+#change memes library position to [1]
+#make a return for the case where there are no comments (shows undefined in comments)

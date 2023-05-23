@@ -21,6 +21,12 @@ export default function Sidebar() {
                 <li className="nav-item">
                     <NavLink className='nav-link' activeclassname='active' to='/uploadedMemes'>Uploaded Memes</NavLink>
                 </li>
+                <li className="nav-item">
+                    <NavLink className='nav-link' activeclassname='active' to='/createdMemes'>Created Memes</NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink className='nav-link' activeclassname='active' to='/commentedMemes'>Commented Memes</NavLink>
+                </li>
             </ul>
         </div>
     );

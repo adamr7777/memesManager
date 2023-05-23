@@ -4,17 +4,17 @@ import Sidebar from '../Components/Sidebar';
 import MemesList from '../Components/MemesList';
 
 
-import useLibrary from '../customHooks/useLibrary';
+import useCreatedMemes from '../customHooks/useCreatedMemes';
 
 
 
 
-export default function FavoriteMemes() {
+export default function CreatedMemes() {
     return (
         <div className='container-fluid'>
             <div className="row">
                 <Sidebar/>
-                <MemesList customHook={()=> useLibrary('favoriteMemes')}/>
+                <MemesList customHook={useCreatedMemes}/>
             </div>      
         </div>
     );
