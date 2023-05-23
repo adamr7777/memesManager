@@ -10,8 +10,13 @@ export default function MemeCard(props) {
     
 
     const cardStyle = {
-        margin: '30px 0'
+        margin: '30px 0',
+        maxWidth: '450px'
     };
+
+    // const imgStyle = {
+    //     maxWidth: '300px'
+    // };
 
    
     

@@ -1,5 +1,5 @@
 #make a background for memes pool
-#catch for API
+#catch for API <completed
 #local storage functionality
 #shuffle button for memes pool
 #when the comment window is up the background should turn opaque
@@ -9,5 +9,7 @@
 #refactor that a component would send item instead of index 
 #review or delete remove meme functionality
 #in Upload changeHandler() set an error catcher when choose file is clicked and closed without uploading anything
-#recactor API promises to Async/Await
+#recactor API promises to Async/Await <completed
 #change every search by the index to the search by an unique code
+#clean up Context.jsx 
+center memeList

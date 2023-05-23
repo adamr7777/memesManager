@@ -1,73 +1,78 @@
-import React, {useContext, useRef, useEffect} from 'react';
-import { Stage, Layer, Image, Text } from 'react-konva';
+import React, {useContext, useRef, useEffect, useState} from 'react';
 
 import {ContextObj} from '../Components/Context';
 
-export default function Library() {
-    const {memeInCreateMeme} = useContext(ContextObj);
-    // const canvasRef = useRef(null);
-
-    // useEffect(()=> {
-    //     if (!memeInCreateMeme) return;
-
-
-    //     const gif = new GIF({ workerScript: 'gif.worker.js' });
-    //     gif.load(memeInCreateMeme.url, () => {
-    //         renderGifWithText();
-    //     });
-  
-
-
-
-    //     const canvas = canvasRef.current;
-    //     const context = canvas.getContext('2d');
-
-        
-
-    //    gif.render(context, 0, 0);
-    // }, [])
+export default function CreateMeme() {
+    const {memeInCreateMeme, setCompletedMemes} = useContext(ContextObj);
+    const [meme, setMeme] = useState(null);
+    const [text, setText] = useState({top: '', bottom: ''});
+    const [textColor, setTextColor] = useState('#FFFFFF');
+    const canvasRef = useRef(null);
+    const size = 650;
+    const position = 0;
+    const styles = {display: 'flex', justifyContent: 'center', alignItems: 'center'}
     
-    // return (
-    //     <div className='card'>
-    //         {/* {memeInCreateMeme && <img className='card-img-top' src={memeInCreateMeme.url}/>} */}
-    //         <canvas ref={canvasRef}/>
-    //         <div className='card-body'>
-    //             <p className='card-text'>Create your meme!</p>
-    //             <div className='d-flex justify-content-around' >
-            
-    //             </div>
-    //         </div>
-    //     </div>
-    // );
-    let gifUrl = null;
-    useEffect(()=> {
-        if(!memeInCreateMeme) return;
-        gifUrl = memeInCreateMeme.url;
-    },[])
+    
 
-   
+
+    useEffect(()=> {
+        if (!memeInCreateMeme) return;
+        const memeImage = new Image();
+        memeImage.src = memeInCreateMeme.url;
+        memeImage.onload = ()=> setMeme(memeImage);
+    }, [memeInCreateMeme]);
+    
+
+    useEffect(()=> {
+        if (!meme) return;
+        const context = canvasRef.current.getContext('2d');
+        context.clearRect(0, 0, canvasRef.width, canvasRef.height);
+        context.drawImage(meme, position, position, size, size);
+
+        context.font = '28px Comic Sans Mc';
+        context.fillStyle = textColor;
+        context.textAlign = 'center';
+
+        context.fillText(text.top, 300, 40)
+        context.fillText(text.bottom, 300, 620)
+    }, [meme, text]);
+
+    function submitMeme(e) {
+        e.preventDefault();
+        setCompletedMemes((prevState)=> [...prevState, meme]);
+    }
+
+
 
     return (
-        <div className='card'>
-            {/* {memeInCreateMeme && <img className='card-img-top' src={memeInCreateMeme.url}/>} */}
-            {/* <canvas ref={canvasRef}/> */}
-            {memeInCreateMeme && 
-                <div>
-                    <Stage width={400} height={300}>
-                        <Layer>
-                            <Image
-                                image={new window.Image()} // Create a new image object
-                                src={gifUrl} // Set the source of the GIF
-                                width={400}
-                                height={300}
-                            />
-                        </Layer>
-                    </Stage>
-                </div>}
-            <div className='card-body'>
-                <p className='card-text'>Create your meme!</p>
-                <div className='d-flex justify-content-around' >
+        <div className='card mt-4' style={styles}>
+            <div className='mt-3'>
+                {meme && <canvas width={size} height={size} ref={canvasRef}/>}
+            </div>
+            <div>
             
+            </div>
+            <div className='card-body'>
+                <p className='card-text'>Create your meme by choosing the text and the color!</p>
+                <div className='row'>
+                    <form>
+                    <div className='row'>
+                        <div className='col-sm-5'>
+                            <input className='form-control' type='text' onChange={(e)=> setText((prev)=> ({...prev, top: e.target.value}))} value={text.top} placeholder='Top text'/>
+                        </div>
+                        <div className='col-sm-5'>
+                            <input className='form-control' type='text' onChange={(e)=> setText((prev)=> ({...prev, bottom: e.target.value}))} value={text.bottom} placeholder='Bottom text'/>
+                        </div>
+                        <div className='col-sm-2'>
+                            <input className='form-control' type='color' onChange={(e)=> setTextColor(e.target.value)} value={textColor}/>
+                        </div>
+                    </div>
+                        <div className='row'>
+                            <div className='col'>
+                                <button className='btn btn-primary w-100 mt-3' onClick={submitMeme} type='submit'>Submit</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
