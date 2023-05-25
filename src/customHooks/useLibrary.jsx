@@ -8,12 +8,12 @@ export default function useLikedMemes(conditionPrompt) {
     const {memesData} = useContext(ContextObj);
 
     return memesData.map((item, index)=> {
-        const condition = conditionPrompt === 'likedMemes' ? item.liked : 
-            conditionPrompt === 'uploadedMemes' ? item.origin === 'uploaded' :
-                conditionPrompt === 'favoriteMemes' ? item.favorite :
-                conditionPrompt === 'commentedMemes' ? item.comments.length > 0 
+        const condition = conditionPrompt === 'likedMeme' ? item.liked : 
+            conditionPrompt === 'uploadedMeme' ? item.origin === 'uploaded' :
+                conditionPrompt === 'favoriteMeme' ? item.favorite :
+                conditionPrompt === 'commentedMeme' ? item.comments.length > 0 
                     : null;
-        if (condition) return <MemeCard index={index} meme={item} key={index} url={item.url}/>;
+        if (condition) return <MemeCard conditionPrompt={conditionPrompt} index={index} meme={item} key={index} url={item.url}/>;
         else return null;
     }).filter((item)=> item);
 };

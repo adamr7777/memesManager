@@ -6,7 +6,7 @@ import Comment from './Comment';
 
 
 export default function MemeCard(props) {
-    const {memesData, removeMeme, sendMemetoCreate} = useContext(ContextObj);
+    const {memesData, CompletedMemes, removeMeme, sendMemetoCreate} = useContext(ContextObj);
 
     const commentsQuantity = memesData[props.index].comments.length > 0 ? 
         '(' + memesData[props.index].comments.length + ')'
@@ -28,6 +28,11 @@ export default function MemeCard(props) {
                 <Comment className='bm-1' title={`Comment ${index+1}`} comment={item} key={index}/>
             ));
             setCommentsSection(comments);
+            if (!comments) {
+                const comments = CompletedMemes[props.index].comments.map((item, index)=> (
+                    <Comment className='bm-1' title={`Comment ${index+1}`} comment={item} key={index}/>
+                ));
+            };
         }
         else setCommentsSection(`${firstComment} ......`);
     };
@@ -46,7 +51,7 @@ export default function MemeCard(props) {
                     <div className='d-flex justify-content-around' >
                         <button className='btn btn-primary mr-2' onClick={()=> sendMemetoCreate(props.index)}>Send to</button>
                         <button className='btn btn-secondary mr-2' onClick={readComments}>Read Comments {commentsQuantity}</button>
-                        <button className='btn btn-danger'onClick={()=> removeMeme(props.index)}>Remove</button>  
+                        <button className='btn btn-danger'onClick={()=> removeMeme(props.index, props.conditionPrompt)}>Remove</button>  
                     </div>
                 </div>
             </div>

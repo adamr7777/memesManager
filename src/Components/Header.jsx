@@ -1,14 +1,22 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import {Link} from 'react-router-dom';
 
 import'./Header.css';
 
 export default function Header() {
+
+    function resetAll() {
+        localStorage.removeItem('memesData');
+        localStorage.removeItem('completedMemes');
+        window.location.reload();
+    };
+
+
     return (
         <nav className='navbar navbar-expand-sm navbar-light bg-secondary'>
             <div className="container-fluid">
                 <a className='navbar-brand d-inline-block' href='#'>
-                    <img src='./src/assets/icon.png' width='30' className='mr-100'/>Memes Manager
+                    <img src='../icon.png' width='30' className='mr-100'/>Memes Manager
                 </a>
                 <button 
                     className='navbar-toggler' type='button' 
@@ -26,6 +34,7 @@ export default function Header() {
                         <li className='nav-item active'><Link className='nav-link text-white' to='/createMeme'>Create Your Meme</Link></li>
                     </ul>
                 </div>
+                <button className='btn btn-danger ms-auto' onClick={resetAll}>Reset</button>
             </div>
         </nav>
         

@@ -9,7 +9,7 @@ export default function Library() {
         <div className='container-fluid'>
             <div className="row">
                 <Sidebar/>
-                <MemesList customHook={()=>useLibrary('likedMemes')}/>
+                <MemesList customHook={()=>useLibrary('likedMeme')}/>
             </div>      
         </div>
     );

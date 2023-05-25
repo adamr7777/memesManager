@@ -16,7 +16,7 @@ import CommentedMemes from './Pages/CommentedMemes';
 
 
 
-const App =  memo(function App() {
+function App() {
     return (
         <>
             <Header/>
@@ -32,6 +32,6 @@ const App =  memo(function App() {
             </Routes>
         </>
     );
-});
+};
 
 export default App;

@@ -19,6 +19,7 @@ export default function CreateMeme() {
         if (!memeInCreateMeme) return;
         const memeImage = new Image();
         memeImage.src = memeInCreateMeme.url;
+        memeImage.crossOrigin = 'anonymous';
         memeImage.onload = ()=> setMeme(memeImage);
     }, [memeInCreateMeme]);
     
@@ -28,7 +29,7 @@ export default function CreateMeme() {
         const context = canvasRef.current.getContext('2d');
         context.clearRect(0, 0, size, size);
         context.drawImage(meme, position, position, size, size);
-
+        
         context.font = '28px Comic Sans Mc';
         context.fillStyle = textColor;
         context.textAlign = 'center';
@@ -37,20 +38,26 @@ export default function CreateMeme() {
         context.fillText(text.bottom, 300, 620)
     }, [meme, text]);
 
+    // useEffect(()=> {
+    //     localStorage.setItem('completedMemes', JSON.stringify(completedMemes));
+    // }, [completedMemes]);
+    
     function submitMeme(e) {
         e.preventDefault();
         
         const context = canvasRef.current.getContext('2d');
         const url = canvasRef.current.toDataURL();
-        setCompletedMemes((prevState)=> [...prevState, {url: url}]);
+        setCompletedMemes((prevState)=> [...prevState, {url: url, comments: []}]);
+        // console.log('write memes to local working');
         context.clearRect(0, 0, size, size);
-        setMeme(null)
+        setMeme(null);
     };
 
     function removeMeme() {
         const context = canvasRef.current.getContext('2d');
         context.clearRect(0, 0, size, size);
-    }
+    };
+
 
 
     return (

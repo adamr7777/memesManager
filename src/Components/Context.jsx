@@ -9,6 +9,7 @@ export function ContextProvider({children}) {
     const [memesData, setMemesData] = useState([]);
     const [memeInCreateMeme, setMemeInCreateMeme] = useState(null);
     const [completedMemes, setCompletedMemes] = useState([]);
+    // const [siteWillReload, setSiteWillReload] = useState(true);
     const url = 'https://api.giphy.com/v1/gifs/search?api_key=ydEyl4nja4f2KWAwXO98qbi58a076TdS&q=meme&limit=25&offset=0&rating=g&lang=en';
     const section = 'hot';
     const sort = 'hot';
@@ -37,25 +38,42 @@ export function ContextProvider({children}) {
     //         });
     // }, []);
 
+    // useEffect(()=> {
+    //     if (siteWillReload) return
+    //     localStorage.setItem('siteWillReload', JSON.stringify(siteWillReload));
+    // }, [siteWillReload]);
+
+    // useEffect(()=> {
+    //     const localData = JSON.parse(localStorage.getItem('siteWillReload'));
+    //     setSiteWillReload(localData);
+    // }, []);
    
     console.log(completedMemes);
 
     useEffect(()=> {
+        // if (localStorage.getItem('memesData')) return;
         (async function() {
             try {
-                const response = await fetch(imgFlipApi);
-                const data = await response.json();
-                const memes = data.data.memes.map((item)=> {
-                    return {
-                        origin: 'api',
-                        url: item.url,
-                        liked: false,
-                        favorite: false,
-                        comments: [],
-                    };
-                });
-                setMemesData(memes);
-                console.log('API ran')
+                if (localStorage.getItem('memesData')) {
+                    const localData = JSON.parse(localStorage.getItem('memesData'));
+                    setMemesData(localData);
+                } 
+                else {
+                    const response = await fetch(imgFlipApi);
+                    const data = await response.json();
+                    const memes = data.data.memes.map((item)=> {
+                        return {
+                            origin: 'api',
+                            url: item.url,
+                            liked: false,
+                            favorite: false,
+                            comments: [],
+                        };
+                    });
+                    setMemesData(memes);
+                    localStorage.setItem('memesData', JSON.stringify(memesData));
+                    console.log('API ran')
+                };
             }
             catch(error) {
                 alert(error);
@@ -63,7 +81,39 @@ export function ContextProvider({children}) {
         }) ();
     }, []);
 
-   
+
+
+    useEffect(()=> {
+        localStorage.setItem('memesData', JSON.stringify(memesData));
+    }, [memesData]);
+
+    // useEffect(()=> {
+    //     localStorage.setItem('completedMemes', JSON.stringify(completedMemes));
+    // }, [completedMemes]);
+
+    // useEffect(()=> {
+    //     const localData = JSON.parse(localStorage.getItem('memesData'));
+    //     setMemesData(localData);
+    // }, []);
+
+    useEffect(()=> {
+        if (!localStorage.getItem('completedMemes')) return;
+        else {
+            const localData = JSON.parse(localStorage.getItem('completedMemes'));
+            setCompletedMemes(localData);
+        };
+    }, []);
+
+    useEffect(()=> {
+        localStorage.setItem('completedMemes', JSON.stringify(completedMemes));
+    }, [completedMemes]);
+
+
+//    function retreveCompletedMemes() {
+//     console.log('retreveCompletedMemes is working');
+//     if (!localStorage.getItem('completedMemes')) return [];
+//     return JSON.parse(localStorage.getItem('completedMemes'))
+//    };
 
     function likeMeme(memeIndex) {
         setMemesData((prev)=> prev.map((item, index)=> {
@@ -87,21 +137,49 @@ export function ContextProvider({children}) {
         }));
     };
 
-    function removeMeme(memeIndex) {   /*review the function */
-        // setMemesData((prevState)=> [...prevState, {...memeIndex, liked: false}]);
-        // const meme = memesData.map((item, index)=> {
-        //     if (memeIndex !== index) return null;
-        //     else return {...item, liked: false};
-        // }).filter((item)=> item);
-        const meme = memesData[memeIndex];
-        setMemesData((prevState)=> [...prevState, {meme, liked: false}]);
-        // console.log(memeIndex);
+    function removeMeme(memeIndex, conditionPropt) {   /*review the function */
+        // console.log('this is condition:' + ' ' + conditionPropt);
+        if (conditionPropt === 'likedMeme') {
+            const meme = memesData[memeIndex];
+            setMemesData((prevState)=> {
+               const newState = [...prevState];
+               newState[memeIndex].liked = false;
+               return newState;
+            });
+            console.log(memesData);
+        }
+        else if (conditionPropt === 'favoriteMeme') {
+            const meme = memesData[memeIndex];
+            setMemesData((prevState)=> {
+               const newState = [...prevState];
+               newState[memeIndex].favorite = false;
+               return newState;
+            });
+        }
+        else if (conditionPropt === 'uploadedMeme') {
+            const meme = memesData[memeIndex];
+            setMemesData((prevState)=> {
+                const newState = [...prevState];
+                newState.splice(memeIndex, 1);
+                return newState;
+            });
+        }
+        else if (conditionPropt === 'commentedMeme') {
+            const meme = memesData[memeIndex];
+            setMemesData((prevState)=> {
+               const newState = [...prevState];
+               newState[memeIndex].comments = [];
+               return newState;
+            });
+        }
     };
 
     function sendMemetoCreate(memeIndex) {
         const meme = memesData[memeIndex];
         setMemeInCreateMeme(meme);
-    }
+    };
+
+   
 
     // console.log(memesData[0]);
     

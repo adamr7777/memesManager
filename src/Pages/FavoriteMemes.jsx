@@ -14,7 +14,7 @@ export default function FavoriteMemes() {
         <div className='container-fluid'>
             <div className="row">
                 <Sidebar/>
-                <MemesList customHook={()=> useLibrary('favoriteMemes')}/>
+                <MemesList customHook={()=> useLibrary('favoriteMeme')}/>
             </div>      
         </div>
     );
