@@ -12,7 +12,7 @@ export default function useCommentsList() {
     const [commentsSection, setCommentsSection] = useState(`${firstComment} ......`);
     if (typeof commentsSection !== 'object') {
         const comments = memesData[props.index].comments.map((item, index)=> (
-            <Comment className='bm-1' title={`Comment ${index+1}`} comment={item} key={index}/>
+            <Comment className='mb-1' title={`Comment ${index+1}`} comment={item} key={index}/>
         ));
         setCommentsSection(comments);
     }

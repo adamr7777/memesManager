@@ -1,7 +1,6 @@
 import React, {memo} from 'react';
 import {Route, Routes} from 'react-router-dom';
 
-import './styles.css'
 
 import Header from './Components/Header';
 import Pool from './Pages/Pool';

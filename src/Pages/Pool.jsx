@@ -1,8 +1,10 @@
 import React, {useState, useEffect, useContext} from 'react';
 
-import './Pool.css';
 import Meme from '../Components/Meme';
+import BackToTopBtn from '../Components/BackToTopBtn';
 import {ContextObj} from '../Components/Context';
+
+
 
 
 
@@ -15,12 +17,21 @@ export default function Pool() {
     index={index}  
     url={item.url}
     />)
+
+    const gridStyles = {
+        display: 'grid',
+        gridGap: '10px',
+        gridAutoRows: '200px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+        gridAutoFlow: 'dense'
+    };
+
+    
     
     return (
-        <>
-            <div className='grid-container'>
+            <div className='grid-container' style={gridStyles}>
                 {memes}
+                <BackToTopBtn/>
             </div>
-        </>
     );
 };
