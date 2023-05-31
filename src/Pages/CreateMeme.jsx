@@ -4,7 +4,7 @@ import {ContextObj} from '../Components/Context';
 import './CreateMeme.css';
 
 export default function CreateMeme() {
-    const {memeInCreateMeme, setCompletedMemes} = useContext(ContextObj);
+    const {memeInCreateMeme, setMemeInCreateMeme, setCompletedMemes} = useContext(ContextObj);
     const [meme, setMeme] = useState(null);
     const [text, setText] = useState({textA: '', textB: ''});
     const [textAPosition, setTextAPosition] = useState({x: 300, y: 40});
@@ -13,9 +13,12 @@ export default function CreateMeme() {
     const canvasRef = useRef(null);
     const size = 650;
     const position = 0;
-    const styles = {display: 'flex', justifyContent: 'center', alignItems: 'center'}
-    
-    
+    const styles = {display: 'flex', justifyContent: 'center', alignItems: 'center'};
+    const defaultInstructions = 'Create your meme by choosing the text and the color, but do not refresh the page as your work will be lost.';
+    const instructionsWhenSent = 'The newly created meme was submitted to the Created Memes section of Memes Library.';
+    const [intructions, setInstructions] = useState(defaultInstructions);
+    const instructionsColor = intructions === defaultInstructions ? 'green' : 'red';
+    const instructionsStyles = {color: instructionsColor};
 
 
     useEffect(()=> {
@@ -33,7 +36,9 @@ export default function CreateMeme() {
         if (!meme) return;
         const context = canvasRef.current.getContext('2d');
         context.clearRect(0, 0, size, size);
-        context.drawImage(meme, position, position, size, size);
+        canvasRef.current.width = meme.width;
+        canvasRef.current.height = meme.height;
+        context.drawImage(meme, position, position);
         
         context.font = '28px Comic Sans Mc';
         context.fillStyle = textColor;
@@ -43,19 +48,34 @@ export default function CreateMeme() {
         context.fillText(text.textB, textBPosition.x, textBPosition.y);
     }, [meme, text, textAPosition, textBPosition]);
 
-    // useEffect(()=> {
-    //     localStorage.setItem('completedMemes', JSON.stringify(completedMemes));
-    // }, [completedMemes]);
+
+    function clearTheSlate() {
+        setMeme(null);
+        setMemeInCreateMeme(null);
+        setInstructions(instructionsWhenSent);
+        const instructionsTimeout = setTimeout(()=> {
+            setInstructions(defaultInstructions);
+        }, 3000);
+    }
     
     function submitMeme(e) {
         e.preventDefault();
-        
-        const context = canvasRef.current.getContext('2d');
-        const url = canvasRef.current.toDataURL();
-        setCompletedMemes((prevState)=> [...prevState, {url: url, comments: []}]);
-        // console.log('write memes to local working');
-        context.clearRect(0, 0, size, size);
-        setMeme(null);
+        if (!meme) return;
+        try {
+            const context = canvasRef.current.getContext('2d');
+            const url = canvasRef.current.toDataURL();
+            setCompletedMemes((prevState)=> [...prevState, {url: url, comments: []}]);
+            context.clearRect(0, 0, size, size);
+            clearTheSlate();
+            throw new Error(error);
+        }
+        catch(error) {
+            const errorMsg = "We're sorry, but at the moment, we don't offer compatibility with desktop versions of Firefox. Try using Chrome or any other browser."
+            if (error instanceof DOMException && error.name === 'SecurityError') {
+                window.alert(errorMsg);
+            }
+            else return;
+        };
     };
 
     function removeMeme() {
@@ -71,8 +91,7 @@ export default function CreateMeme() {
                 {meme && <canvas width={size} height={size} ref={canvasRef}/>}
             </div>
             <div className='card-body'>
-                <p className='card-text'>Create your meme by choosing the text and the color, 
-                but do not refresh the page as your work will be lost</p>
+                <p className='card-text' style={instructionsStyles}>{intructions}</p>
                 <div className='container-joysticks'>
                     <div className='joystick-container'>
                         <p className='joystick-text'>Text A</p>

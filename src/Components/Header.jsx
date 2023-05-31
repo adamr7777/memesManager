@@ -1,16 +1,19 @@
-import React, {useState, useContext} from 'react';
-import {Link} from 'react-router-dom';
+import React from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 
 
 export default function Header() {
-
+    const navigate = useNavigate();
+   
     function resetAll() {
         localStorage.removeItem('memesData');
         localStorage.removeItem('completedMemes');
+        navigate('/');
         window.location.reload();
     };
 
     const fontSize = {fontSize: '13px'};
+    
 
 
     return (
@@ -19,14 +22,6 @@ export default function Header() {
                 <a className='navbar-brand d-inline-block' style={{color: 'brown'}} href='#'>
                     <img src='../icon.png' width='30'/>Memes Manager
                 </a>
-                <button 
-                    className='navbar-toggler' type='button' 
-                    data-bs-toggle='collapse'
-                    data-bs-target='#navbarNav'
-                    aria-controls='navbarNav'
-                    aria-expanded='false'
-                    aria-label='Toggle navigation'
-                ><span className='navbar-toggler-icon'></span></button>
                 <div className='collapse navbar-collapse' id='navbarNav'>
                     <ul className='navbar-nav'>
                         <li className='nav-item active' style={fontSize}><Link className='nav-link text-white' to='/'>Memes Pool</Link></li>
@@ -35,7 +30,17 @@ export default function Header() {
                         <li className='nav-item active' style={fontSize}><Link className='nav-link text-white' to='/upload'>Upload Your Meme</Link></li>
                     </ul>
                 </div>
-                <button className='btn btn-danger ms-auto' onClick={resetAll}>Reset</button>
+                <button className='btn btn-danger mx-auto ms-auto-sm' onClick={resetAll}>Reset</button>
+                <div>
+                    <button 
+                        className='navbar-toggler' type='button' 
+                        data-bs-toggle='collapse'
+                        data-bs-target='#navbarNav'
+                        aria-controls='navbarNav'
+                        aria-expanded='false'
+                        aria-label='Toggle navigation'
+                    ><span className='navbar-toggler-icon'></span></button>
+                </div>
             </div>
         </nav>
        

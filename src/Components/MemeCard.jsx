@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 
 import {ContextObj} from './Context';
 import Comment from './Comment';
@@ -8,26 +8,32 @@ import Comment from './Comment';
 export default function MemeCard(props) {
     const {memesData, memeInCreateMeme, CompletedMemes, removeMeme, setMemeInCreateMeme} = useContext(ContextObj);
 
+    
     const commentsQuantity = memesData[props.index].comments.length > 0 ? 
-        '(' + memesData[props.index].comments.length + ')'
-            : null;
-
+    '(' + memesData[props.index].comments.length + ')'
+    : null;
+    
     const firstComment = memesData[props.index].comments[0];
     const noCommentsMsg = 'This meme has no comments yet'
     const instructionText = 'Click on Use Template to add captions';
     const memeInCreateText = 'The meme has been sent to Create Your Meme. Go there to edit it.';
-
+    
     const [commentsSection, setCommentsSection] = useState(firstComment ? `${firstComment} ......` : noCommentsMsg );
     const instructions = memeInCreateMeme ? (memeInCreateMeme.url === memesData[props.index].url ? memeInCreateText 
         : instructionText ) : instructionText ;
-            // change to individual code
-    const instructionsColor = memeInCreateMeme ? (memeInCreateMeme.url === memesData[props.index].url ? 'red' 
+        // change to individual code
+        const instructionsColor = memeInCreateMeme ? (memeInCreateMeme.url === memesData[props.index].url ? 'red' 
         : 'green' ) : 'green';
-
+        
+    const [disabledBtn, setDisabledBtn] = useState(false);
     
     const cardStyle = {
         margin: '30px 0',
         maxWidth: '450px'
+    };
+
+    const btnStyles = {
+        marginBottom: '5px' 
     };
 
     function readComments() {
@@ -50,6 +56,12 @@ export default function MemeCard(props) {
         setMemeInCreateMeme(meme);
     };
 
+
+    useEffect(()=> {
+        const btnDisabled = memeInCreateMeme ? (memeInCreateMeme.url === memesData[props.index].url ? 
+            true : false ) : false;
+        setDisabledBtn(btnDisabled);
+    }, [memeInCreateMeme]);
     
 
   
@@ -63,10 +75,10 @@ export default function MemeCard(props) {
                         <p className='card-text'>{commentsSection}</p>
                     </div>
                     <p className='card-text' style={{color: instructionsColor}}>{instructions}</p>
-                    <div className='d-flex justify-content-around' >
-                        <button className='btn btn-primary mr-2' onClick={()=> sendMemeToCreate(props.index)}>Use Template</button>
-                        <button className='btn btn-secondary mr-2' onClick={readComments}>Read Comments {commentsQuantity}</button>
-                        <button className='btn btn-danger'onClick={()=> removeMeme(props.index, props.conditionPrompt)}>Remove</button>  
+                    <div className='d-flex flex-column flex-sm-row justify-content-around' >
+                        <button style={btnStyles} className='btn btn-primary mr-2' disabled={disabledBtn} onClick={()=> sendMemeToCreate(props.index)}>Use Template</button>
+                        <button style={btnStyles} className='btn btn-secondary mr-2' onClick={readComments}>Read Comments {commentsQuantity}</button>
+                        <button style={btnStyles} className='btn btn-danger'onClick={()=> removeMeme(props.index, props.conditionPrompt)}>Remove</button>  
                     </div>
                 </div>
             </div>

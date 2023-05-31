@@ -15,37 +15,38 @@
 #change memes library position to [1] <completed
 #make a return for the case where there are no comments (shows undefined in comments) <completed
 #when the meme is sent to create meme, the library should display a warning <completed
-
-
-
-
-
-
-
-
-
-#meme submited text in create your meme 
-
-
-#small screens: switch reset and burger btn
+#meme submited text in create your meme <completed
+#small screens: switch reset and burger btn <completed
+#small screens: solve buttons at memeCard <completed
+#fix canvas size <completed     
 urgent#Uncaught DOMException: The operation is insecure. when uploading a createdMeme <partlySolved: works on most browsers, but not firefox desktop. Therefore:
-#make a pop up alert window lol
-#in Upload changeHandler() set an error catcher when choose file is clicked and closed without uploading anything
-#center memeList
-#fix canvas size
+#make a pop up alert window lol <completed
+#when reset on any other pages than pool, throws error <completed
+#review the error pop up <completed
+#make a more detailed error message for create memes(desktop firefox) <completed
+
+
+
+
+
+
+
+
+
+
+#delete comments?
 #make so that the comments from the meme-template persists when transfered to the CompletedMemes 
-#small screens: solve buttons at memeCard
+#make bigger and cooler font
+#both texts starting position should be in the middle
 
 
 #review NavLinks and .active
 #refactor that a component would send item instead of index 
 #change every search by the index to the search by an unique code
 #fix lidateDOMNesting on Comment.jsx
-#when reset on any other pages than pool, throws error
 #review spelling of conditionPrompt at context removeMeme()
 #'warning: validateDOMNesting(...): <h5> cannot appear as a descendant of <p>.' when reading comments
-#delete comments?
-#delete comments from removeMeme() at context
+#delete comments from removeMeme() at context and from every component
 #refactor const intructions at Memecard  // change to individual code
  
 
