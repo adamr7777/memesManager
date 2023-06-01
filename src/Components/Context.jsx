@@ -4,7 +4,6 @@ import React, {createContext, useState, useEffect} from 'react';
 export const ContextObj = createContext();
 
 export function ContextProvider({children}) {
-    const allowApi = true;
     const [memesData, setMemesData] = useState([]);
     const [memeInCreateMeme, setMemeInCreateMeme] = useState(null);
     const [completedMemes, setCompletedMemes] = useState([]);
@@ -164,7 +163,8 @@ export function ContextProvider({children}) {
 
     
     return (
-        <ContextObj.Provider value={{memesData, memeInCreateMeme, completedMemes, setMemesData, setCompletedMemes, setMemeInCreateMeme, likeMeme, commentMeme, favoriteMeme, removeMeme}}>
+        <ContextObj.Provider value={{memesData, memeInCreateMeme, completedMemes, 
+            setMemesData, setCompletedMemes, setMemeInCreateMeme, likeMeme, commentMeme, favoriteMeme, removeMeme}}>
             {children}
         </ContextObj.Provider>
     );
