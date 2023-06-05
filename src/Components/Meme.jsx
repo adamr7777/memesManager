@@ -16,8 +16,6 @@ export default function Meme(props) {
     const [currentComment, setCurrentComment] = useState('');
     const commentsQuantity = memesData[props.index].comments.length > 0 ? 
     memesData[props.index].comments.length : null;
-    // const [commentsQuantity, setCommentsQuantity] = useState(null);
-    // <i class="ri-checkbox-line"></i>
 
     function handleClose() {
         setCommentIconClicked(false);
@@ -29,13 +27,6 @@ export default function Meme(props) {
         setCurrentComment('');
     }
 
-    // useEffect(()=> {
-    //     const commentsArray = memesData[props.index].comments;
-    //     if (commentsArray.length < 1) return;
-    //     setCommentsQuantity(commentsArray.length)
-    // }, 
-    //     [memesData[props.index].comments])
-
 
     return (
         <div onMouseEnter={()=> setHovered(true)} onMouseLeave={()=> setHovered(false)} className='meme-container'>
@@ -46,8 +37,8 @@ export default function Meme(props) {
                 <i className='ri-chat-1-line' onClick={()=>setCommentIconClicked(true)}>{commentsQuantity}</i>}
             {commentIconClicked && <div className='comment-window'>
                 <textarea className='textarea' onChange={(e)=> setCurrentComment(e.target.value)} value={currentComment}/>
-                <button type="button" className="btn-close" onClick={handleClose} aria-label="Close"></button>
-                <button type="button" className="btn btn-outline-primary btn-add-comment" onClick={handleSubmit} >Submit</button>
+                <button type='button' className='btn-close' onClick={handleClose} aria-label='Close'></button>
+                <button type='button' className='btn btn-outline-primary btn-add-comment' onClick={handleSubmit} >Submit</button>
             </div>}
         </div>
     );

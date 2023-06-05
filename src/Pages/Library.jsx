@@ -7,7 +7,7 @@ import useLibrary from '../customHooks/useLibrary';
 export default function Library() {
     return (
         <div className='container-fluid'>
-            <div className="row">
+            <div className='row'>
                 <Sidebar/>
                 <MemesList customHook={()=>useLibrary('likedMeme')}/>
             </div>      

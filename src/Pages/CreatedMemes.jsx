@@ -12,7 +12,7 @@ import useCreatedMemes from '../customHooks/useCreatedMemes';
 export default function CreatedMemes() {
     return (
         <div className='container-fluid'>
-            <div className="row">
+            <div className='row'>
                 <Sidebar/>
                 <MemesList customHook={useCreatedMemes}/>
             </div>      

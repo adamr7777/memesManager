@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useContext} from 'react';
 
 import Meme from '../Components/Meme';
 import BackToTopBtn from '../Components/BackToTopBtn';

@@ -11,7 +11,7 @@ export default function Comment(props) {
           <div className='card-body'>
             <h5 className='card-title'>{props.title}</h5>
             <div className='card-text'>{props.comment}</div>
-            <button type="button" className="btn-close" onClick={()=> handleClose(props.index)} aria-label="Close"></button>
+            <button type='button' className='btn-close' onClick={()=> handleClose(props.index)} aria-label='Close'></button>
           </div>
         </div>
       </div>

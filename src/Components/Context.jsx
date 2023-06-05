@@ -23,6 +23,7 @@ export function ContextProvider({children}) {
                     const data = await response.json();
                     const memes = data.data.memes.map((item)=> {
                         return {
+                            id: item.id,
                             origin: 'api',
                             url: item.url,
                             liked: false,
@@ -32,7 +33,6 @@ export function ContextProvider({children}) {
                     });
                     setMemesData(memes);
                     localStorage.setItem('memesData', JSON.stringify(memesData));
-                    console.log('API ran')
                 };
             }
             catch(error) {
@@ -81,49 +81,8 @@ export function ContextProvider({children}) {
         }));
     };
 
-    function removeMeme(memeIndex, conditionPropt) {   /*review the function */
-
-        // if (conditionPropt === 'likedMeme') {
-        //     const meme = memesData[memeIndex];
-        //     setMemesData((prevState)=> {
-        //        const newState = [...prevState];
-        //        newState[memeIndex].liked = false;
-        //        return newState;
-        //     });
-        // }
-        // else if (conditionPropt === 'favoriteMeme') {
-        //     const meme = memesData[memeIndex];
-        //     setMemesData((prevState)=> {
-        //        const newState = [...prevState];
-        //        newState[memeIndex].favorite = false;
-        //        return newState;
-        //     });
-        // }
-        // else if (conditionPropt === 'uploadedMeme') {
-        //     const meme = memesData[memeIndex];
-        //     setMemesData((prevState)=> {
-        //         const newState = [...prevState];
-        //         newState.splice(memeIndex, 1);
-        //         return newState;
-        //     });
-        // }
-        // else if (conditionPropt === 'commentedMeme') {
-        //     const meme = memesData[memeIndex];
-        //     setMemesData((prevState)=> {
-        //        const newState = [...prevState];
-        //        newState[memeIndex].comments = [];
-        //        return newState;
-        //     });
-        // }
-        // else if (conditionPropt === 'createdMeme') {
-        //     const meme = completedMemes[memeIndex];
-        //     setCompletedMemes((prevState)=> {
-        //         const newState = [...prevState];
-        //         newState.splice(memeIndex, 1);
-        //         return newState;
-        //     });
-        // };
-        switch(conditionPropt) {
+    function removeMeme(memeIndex, conditionPrompt) {   
+        switch(conditionPrompt) {
             case 'likedMeme':
                 setMemesData((prevState)=> {
                     const newState = [...prevState];

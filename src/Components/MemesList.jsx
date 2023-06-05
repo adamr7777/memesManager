@@ -1,13 +1,10 @@
-import React, {useContext} from 'react';
-
-import {ContextObj} from './Context';
-import MemeCard from './MemeCard';
+import React from 'react';
 
 
 
 export default function MemesList({customHook}) {
     return (
-        <div className="col-9">
+        <div className='col-9'>
             <div>
                 {customHook()}
             </div>
@@ -17,4 +14,3 @@ export default function MemesList({customHook}) {
 
 
 
-// return <MemeCard key={index} url={item.url} comments={item.comments}/>

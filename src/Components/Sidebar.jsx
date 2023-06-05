@@ -18,13 +18,13 @@ export default function Sidebar() {
                         >Favorite Memes
                     </NavLink>
                 </li>
-                <li className="nav-item">
+                <li className='nav-item'>
                     <NavLink className='nav-link' activeclassname='active' to='/uploadedMemes'>Uploaded Memes</NavLink>
                 </li>
-                <li className="nav-item">
+                <li className='nav-item'>
                     <NavLink className='nav-link' activeclassname='active' to='/createdMemes'>Created Memes</NavLink>
                 </li>
-                <li className="nav-item">
+                <li className='nav-item'>
                     <NavLink className='nav-link' activeclassname='active' to='/commentedMemes'>Commented Memes</NavLink>
                 </li>
             </ul>
@@ -33,11 +33,6 @@ export default function Sidebar() {
 };
 
 
-// 'nav-link' 'nav-item'
-
-// onClick={()=> setLinkActive((prev)=> ({...prev, link1: true, link2: false}))}
-
-// {linkActive.link2 ? 'nav-link active' : 'nav-link'}
 
 
 

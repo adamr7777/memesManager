@@ -7,8 +7,8 @@ export default function CreateMeme() {
     const {memeInCreateMeme, setMemeInCreateMeme, setCompletedMemes} = useContext(ContextObj);
     const [meme, setMeme] = useState(null);
     const [text, setText] = useState({textA: '', textB: ''});
-    const [textAPosition, setTextAPosition] = useState({x: 300, y: 40});
-    const [textBPosition, setTextBPosition] = useState({x: 300, y: 620});
+    const [textAPosition, setTextAPosition] = useState({x: 300, y: 400});
+    const [textBPosition, setTextBPosition] = useState({x: 300, y: 500});
     const [textColor, setTextColor] = useState('#000000');
     const canvasRef = useRef(null);
     const size = 650;
@@ -40,9 +40,13 @@ export default function CreateMeme() {
         canvasRef.current.height = meme.height;
         context.drawImage(meme, position, position);
         
-        context.font = '28px Comic Sans Mc';
+        context.font = 'bold 32px Comic Sans Mc';
         context.fillStyle = textColor;
         context.textAlign = 'center';
+        context.shadowColor = 'rgba(0, 0, 0, 0.5)'; 
+        context.shadowBlur = 4; 
+        context.shadowOffsetX = 2; 
+        context.shadowOffsetY = 2; 
 
         context.fillText(text.textA, textAPosition.x, textAPosition.y);
         context.fillText(text.textB, textBPosition.x, textBPosition.y);
@@ -57,6 +61,8 @@ export default function CreateMeme() {
             setInstructions(defaultInstructions);
         }, 3000);
     }
+
+    
     
     function submitMeme(e) {
         e.preventDefault();
@@ -64,7 +70,8 @@ export default function CreateMeme() {
         try {
             const context = canvasRef.current.getContext('2d');
             const url = canvasRef.current.toDataURL();
-            setCompletedMemes((prevState)=> [...prevState, {url: url, comments: []}]);
+            const createdMemeComments = memeInCreateMeme.comments;
+            setCompletedMemes((prevState)=> [...prevState, {url: url, comments: createdMemeComments}]);
             context.clearRect(0, 0, size, size);
             clearTheSlate();
             throw new Error(error);

@@ -18,16 +18,24 @@ export default function Header() {
 
     return (
         <nav className='navbar navbar-expand-sm navbar-light bg-secondary'>
-            <div className="container-fluid">
+            <div className='container-fluid'>
                 <a className='navbar-brand d-inline-block' style={{color: 'brown'}} href='#'>
                     <img src='../icon.png' width='30'/>Memes Manager
                 </a>
                 <div className='collapse navbar-collapse' id='navbarNav'>
                     <ul className='navbar-nav'>
-                        <li className='nav-item active' style={fontSize}><Link className='nav-link text-white' to='/'>Memes Pool</Link></li>
-                        <li className='nav-item active' style={fontSize}><Link className='nav-link text-white' to='/library'>Meme Library</Link></li>
-                        <li className='nav-item active' style={fontSize}><Link className='nav-link text-white' to='/createMeme'>Create Your Meme</Link></li>
-                        <li className='nav-item active' style={fontSize}><Link className='nav-link text-white' to='/upload'>Upload Your Meme</Link></li>
+                        <li className='nav-item active' style={fontSize}>
+                            <Link className='nav-link text-white' to='/'>Memes Pool</Link>
+                        </li>
+                        <li className='nav-item active' style={fontSize}>
+                            <Link className='nav-link text-white' to='/library'>Memes Library</Link>
+                        </li>
+                        <li className='nav-item active' style={fontSize}>
+                            <Link className='nav-link text-white' to='/createMeme'>Create Your Meme</Link>
+                        </li>
+                        <li className='nav-item active' style={fontSize}>
+                            <Link className='nav-link text-white' to='/upload'>Upload Your Meme</Link>
+                        </li>
                     </ul>
                 </div>
                 <button className='btn btn-danger mx-auto ms-auto-sm' onClick={resetAll}>Reset</button>

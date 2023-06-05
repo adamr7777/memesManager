@@ -19,10 +19,11 @@ export default function MemeCard(props) {
     const memeInCreateText = 'The meme has been sent to Create Your Meme. Go there to edit it.';
     
     const [commentsSection, setCommentsSection] = useState(firstComment ? `${firstComment} ......` : noCommentsMsg);
-    const instructions = memeInCreateMeme ? (memeInCreateMeme.url === memesData[props.index].url ? memeInCreateText 
-        : instructionText ) : instructionText ;
-        // change to individual code
-        const instructionsColor = memeInCreateMeme ? (memeInCreateMeme.url === memesData[props.index].url ? 'red' 
+
+    const instructions = memeInCreateMeme ? (memeInCreateMeme.id === memesData[props.index].id ? memeInCreateText 
+        : instructionText) : instructionText ;
+     
+    const instructionsColor = memeInCreateMeme ? (memeInCreateMeme.url === memesData[props.index].url ? 'red' 
         : 'green' ) : 'green';
         
     const [disabledBtn, setDisabledBtn] = useState(false);
@@ -41,7 +42,7 @@ export default function MemeCard(props) {
     function readComments() {
 
         function handleClose(commentIndex) {
-            // console.log(props.index);
+            
             setMemesData((prevState)=> {
                 const newState = [...prevState];
                 const commentsArray = newState[props.index].comments;
@@ -53,7 +54,6 @@ export default function MemeCard(props) {
                 <Comment className='mb-1' title={`Comment ${index+1}`} index={index} handleClose={handleClose} comment={item} key={index}/>
             ));
             setCommentsSection(comments.length > 0 ? comments : noCommentsMsg);
-            console.log(commentsSection);
         };
 
         if (typeof commentsSection !== 'object') {
@@ -87,9 +87,6 @@ export default function MemeCard(props) {
         else setReadCommDisabled(false);
     }, [commentsSection])
     
-
-  
-    
     return (
             <div className='card' style={cardStyle}>
                 <img src={props.url} className='card-img-top' alt='...'/>
@@ -112,8 +109,3 @@ export default function MemeCard(props) {
 
 
 
-{/* <button class="btn btn-primary" data-toggle="collapse" data-target="#commentSection">Expand</button>
-
-<div id="commentSection" class="collapse">
-  <!-- Comment section content goes here -->
-</div> */}

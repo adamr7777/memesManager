@@ -26,6 +26,12 @@ urgent#Uncaught DOMException: The operation is insecure. when uploading a create
 #make a more detailed error message for create memes(desktop firefox) <completed
 #'warning: validateDOMNesting(...): <h5> cannot appear as a descendant of <p>.' when reading comments <completed
 #delete comments? <completed
+#make so that the comments from the meme-template persists when transfered to the CompletedMemes <completed
+#both texts starting position should be in the middle <completed
+#make bigger and cooler font <completed
+#review spelling of conditionPrompt at context removeMeme() <completed
+#refactor const intructions at Memecard  // refactor url to some sort of key <completed
+#delete comments from removeMeme() at context and from every component <completed
 
 
 
@@ -36,17 +42,8 @@ urgent#Uncaught DOMException: The operation is insecure. when uploading a create
 
 
 
-#make so that the comments from the meme-template persists when transfered to the CompletedMemes 
-#make bigger and cooler font
-#both texts starting position should be in the middle
 
 
-#review NavLinks and .active
-#refactor that a component would send item instead of index 
-#change every search by the index to the search by an unique code
-#fix lidateDOMNesting on Comment.jsx
-#review spelling of conditionPrompt at context removeMeme()
-#delete comments from removeMeme() at context and from every component
-#refactor const intructions at Memecard  // change to individual code
+
  
 

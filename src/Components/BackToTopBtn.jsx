@@ -20,7 +20,7 @@ export default function BackToTopBtn() {
     };
 
     return (
-        <button className="btn btn-warning rounded-circle position-fixed" onClick={goToTop} style={toTopBtnStyles}>
+        <button className='btn btn-warning rounded-circle position-fixed' onClick={goToTop} style={toTopBtnStyles}>
             <FontAwesomeIcon icon={faArrowUp}/>
         </button> 
     );
