@@ -168,10 +168,12 @@ export default function CreateMeme() {
                         </div>
                         <div className='row'>
                             <div className='col'>
-                                <button className='btn btn-primary w-100 mt-3' onClick={submitMeme} type='submit'>Submit</button>
+                                <button className='btn btn-primary w-100 mt-3' 
+                                    onClick={submitMeme} type='submit'>Submit</button>
                             </div>
                             <div className='col-5'>
-                                <button className='btn btn-danger w-100 mt-3' onClick={removeMeme} type='submit'>Remove</button>
+                                <button className='btn btn-danger w-100 mt-3' 
+                                    onClick={removeMeme} type='submit'>Remove</button>
                             </div>
                         </div>
                     </form>

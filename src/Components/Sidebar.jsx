@@ -4,7 +4,6 @@ import {NavLink} from 'react-router-dom';
 import './Sidebar.css'
 
 export default function Sidebar() {
-    const [linkActive, setLinkActive] = useState({link1: false, link2: false});
     return (
         <div className='col-3 sidebar'>
             <ul className='nav flex-column'>

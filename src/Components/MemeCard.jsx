@@ -10,8 +10,8 @@ export default function MemeCard(props) {
 
     
     const commentsQuantity = memesData[props.index].comments.length > 0 ? 
-    '(' + memesData[props.index].comments.length + ')'
-    : null;
+        '(' + memesData[props.index].comments.length + ')'
+            : null;
     
     const firstComment = memesData[props.index].comments[0];
     const noCommentsMsg = 'This meme has no comments yet'
@@ -51,19 +51,22 @@ export default function MemeCard(props) {
                 return newState;
             });
             const comments = memesData[props.index].comments.map((item, index)=> (
-                <Comment className='mb-1' title={`Comment ${index+1}`} index={index} handleClose={handleClose} comment={item} key={index}/>
+                <Comment className='mb-1' title={`Comment ${index+1}`} index={index} 
+                    handleClose={handleClose} comment={item} key={index}/>
             ));
             setCommentsSection(comments.length > 0 ? comments : noCommentsMsg);
         };
 
         if (typeof commentsSection !== 'object') {
             const comments = memesData[props.index].comments.map((item, index)=> (
-                <Comment className='mb-1' title={`Comment ${index+1}`} index={index} handleClose={handleClose} comment={item} key={index}/>
+                <Comment className='mb-1' title={`Comment ${index+1}`} index={index} 
+                    handleClose={handleClose} comment={item} key={index}/>
             ));
             setCommentsSection(comments);
             if (!comments) {
                 const comments = CompletedMemes[props.index].comments.map((item, index)=> (
-                    <Comment className='mb-1' title={`Comment ${index+1}`} index={index} handleClose={handleClose} comment={item} key={index}/>
+                    <Comment className='mb-1' title={`Comment ${index+1}`} index={index} 
+                        handleClose={handleClose} comment={item} key={index}/>
                 ));
             };
         }
@@ -85,7 +88,7 @@ export default function MemeCard(props) {
     useEffect(()=> {
         if (commentsSection === noCommentsMsg) setReadCommDisabled(true);
         else setReadCommDisabled(false);
-    }, [commentsSection])
+    }, [commentsSection]);
     
     return (
             <div className='card' style={cardStyle}>
@@ -97,9 +100,12 @@ export default function MemeCard(props) {
                     </div>
                     <p className='card-text' style={{color: instructionsColor}}>{instructions}</p>
                     <div className='d-flex flex-column flex-sm-row justify-content-around' >
-                        <button style={btnStyles} className='btn btn-primary mr-2' disabled={disabledBtn} onClick={()=> sendMemeToCreate(props.index)}>Use Template</button>
-                        <button style={btnStyles} className='btn btn-secondary mr-2' disabled={readCommDisabled} onClick={readComments}>Read Comments {commentsQuantity}</button>
-                        <button style={btnStyles} className='btn btn-danger'onClick={()=> removeMeme(props.index, props.conditionPrompt)}>Remove</button>  
+                        <button style={btnStyles} className='btn btn-primary mr-2' disabled={disabledBtn} 
+                            onClick={()=> sendMemeToCreate(props.index)}>Use Template</button>
+                        <button style={btnStyles} className='btn btn-secondary mr-2' disabled={readCommDisabled} 
+                            onClick={readComments}>Read Comments {commentsQuantity}</button>
+                        <button style={btnStyles} className='btn btn-danger'
+                            onClick={()=> removeMeme(props.index, props.conditionPrompt)}>Remove</button>  
                     </div>
                 </div>
             </div>

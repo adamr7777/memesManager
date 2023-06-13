@@ -16,7 +16,7 @@ export default function Comment(props) {
         </div>
       </div>
     );
-  }
+  };
   
 
   

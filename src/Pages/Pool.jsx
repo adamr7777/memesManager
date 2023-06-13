@@ -13,9 +13,9 @@ export default function Pool() {
     
     
     const memes = memesData.map((item, index)=> <Meme 
-    key={index} 
-    index={index}  
-    url={item.url}
+        key={index} 
+        index={index}  
+        url={item.url}
     />)
 
     const gridStyles = {
